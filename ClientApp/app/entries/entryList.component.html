@@ -1,0 +1,21 @@
+﻿
+<div *ngIf="entries?.length>0;else nodata">
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Term</th>
+                <th>Definition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of entries">
+                    <td>{{e.term}}</td>
+                    <td>{{e.definition}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #nodata>
+    <h4 class="m-1">Waiting for data...</h4>
+</ng-template>

@@ -1,0 +1,51 @@
+﻿<table *ngIf="tableMode; else create" class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <!-- <td>Id</td> -->
+            <th>Term</th>
+            <th>Difinition</th>
+            <!-- <th>Category</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of entries">
+            <ng-template [ngIf]="e.id != entry?.id" [ngIfElse]="edit">
+                <!-- <td>{{e.id}}</td> -->
+                <td>{{e.term}}</td>
+                <td>{{e.definition}}</td>
+                <!-- <td>{{e.category}}</td> -->
+                <td class="text-right">
+                    <button class="btn btn-sm btn-primary" (click)="selectEntry(e.id)">Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteEntry(e.id)">Delete</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6" class="text-center">
+                <button class="btn btn-primary btn-sm" (click)="clearEntry();tableMode=false">Create</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<entry-pagination></entry-pagination>
+
+
+<ng-template #create>
+    <admin-entry-editor></admin-entry-editor>
+    <div class="text-center">
+        <button class="btn btn-sm btn-primary" (click)="saveEntry()">Save</button>
+        <button class="btn btn-sm btn-primary" (click)="clearEntry()">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #edit>
+    <td colspan="6">
+        <admin-entry-editor></admin-entry-editor>
+        <div class="text-center">
+            <button class="btn btn-sm btn-primary" (click)="saveEntry()">Save</button>
+            <button class="btn btn-sm btn-primary" (click)="clearEntry()">Cancel</button>
+        </div>
+    </td>
+</ng-template>
